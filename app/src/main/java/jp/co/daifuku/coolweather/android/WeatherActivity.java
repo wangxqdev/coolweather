@@ -75,6 +75,10 @@ public class WeatherActivity extends AppCompatActivity {
         return swipeRefresh;
     }
 
+    public void setWeatherId(String weatherId) {
+        this.weatherId = weatherId;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
