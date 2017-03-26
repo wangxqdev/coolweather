@@ -2,6 +2,8 @@ package jp.co.daifuku.coolweather.android.util;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,6 +11,7 @@ import org.json.JSONObject;
 import jp.co.daifuku.coolweather.android.db.City;
 import jp.co.daifuku.coolweather.android.db.County;
 import jp.co.daifuku.coolweather.android.db.Province;
+import jp.co.daifuku.coolweather.android.gson.Weather;
 
 public class Utility {
 
@@ -70,5 +73,17 @@ public class Utility {
             }
         }
         return false;
+    }
+
+    public static Weather handleWeatherResponse(String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weahterContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weahterContent, Weather.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
