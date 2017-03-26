@@ -1,5 +1,6 @@
 package jp.co.daifuku.coolweather.android;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -25,6 +26,7 @@ import java.io.IOException;
 
 import jp.co.daifuku.coolweather.android.gson.Forecast;
 import jp.co.daifuku.coolweather.android.gson.Weather;
+import jp.co.daifuku.coolweather.android.service.AutoUpdateService;
 import jp.co.daifuku.coolweather.android.util.HttpUtil;
 import jp.co.daifuku.coolweather.android.util.Utility;
 import okhttp3.Call;
@@ -209,6 +211,8 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
     private void loadBingPic() {
